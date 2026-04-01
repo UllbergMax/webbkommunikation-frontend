@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotellbokning</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Hotellbokning</h1>
+<div id="rooms"></div>
+
+<script>
+const apiUrl = "http://127.0.0.1:8080/rooms";
+
+async function getRooms() {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    const container = document.getElementById("rooms");
+
+    container.innerHTML = data.map(room => 
+        `<p>
+            Room ${room.room_number} - 
+            ${room.room_type} - 
+            ${room.price}€
+        </p>`
+    ).join("");
+}
+
+getRooms();
+</script>
+
+</body>
+</html>
